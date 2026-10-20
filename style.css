@@ -1,0 +1,403 @@
+:root {
+  --bg-1: #10251b;
+  --bg-2: #193a2b;
+  --card-1: rgba(25, 73, 48, 0.96);
+  --card-2: rgba(66, 82, 38, 0.96);
+  --accent-1: #8a9f45;
+  --accent-2: #c5d99a;
+  --accent-3: #b7793e;
+  --text-1: #fff8e8;
+  --text-2: #e0e6cd;
+  --shadow: rgba(8, 24, 15, 0.5);
+  --glow: rgba(138, 159, 69, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #355b3c 0%, var(--bg-2) 35%, var(--bg-1) 100%);
+  color: var(--text-1);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.page-shell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.trading-card {
+  position: relative;
+  width: min(90vw, 420px);
+  perspective: 1200px;
+  transition: transform 0.25s ease;
+}
+
+.card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.trading-card:hover .card-inner,
+.trading-card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(160deg, var(--card-1), var(--card-2));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 20px 20px 18px;
+  box-shadow: 0 20px 55px var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.card-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(197, 217, 154, 0.16), transparent 40%, rgba(215, 163, 92, 0.16));
+  pointer-events: none;
+}
+
+.card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, rgba(66, 82, 38, 0.98), rgba(21, 83, 55, 0.98));
+}
+
+.card-back h2,
+.card-back p {
+  position: relative;
+  z-index: 1;
+}
+
+.card-back h2 {
+  margin: 4px 0 12px;
+  font-size: 1.8rem;
+}
+
+.card-back > p:not(.eyebrow, .flip-hint) {
+  margin: 0 0 24px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.flip-hint {
+  margin: 12px 0 0;
+  color: var(--text-2);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.trading-card.is-boosted {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.card-header,
+.profile-row,
+.meta-grid,
+.stats,
+.ability-panel,
+.boost-button {
+  position: relative;
+  z-index: 1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.badge,
+.level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.badge {
+  color: #fff1c9;
+}
+
+.level {
+  color: #e0edce;
+}
+
+.card-art {
+  position: relative;
+  z-index: 1;
+  margin: -4px 0 14px;
+  text-align: center;
+  font-size: 3.25rem;
+  line-height: 1;
+  filter: drop-shadow(0 6px 10px rgba(8, 24, 15, 0.35));
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.25), 0 10px 20px rgba(197, 217, 154, 0.2);
+}
+
+.identity h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--text-2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.meta-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.meta-item strong {
+  display: block;
+  font-size: 0.97rem;
+}
+
+.ability-panel {
+  background: linear-gradient(135deg, rgba(138, 159, 69, 0.36), rgba(197, 217, 154, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  margin-bottom: 18px;
+}
+
+.ability-panel h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.ability-panel p:last-child {
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stats div {
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 16px;
+  padding: 12px 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stats span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.stats strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.5rem;
+}
+
+.boost-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-3), #d7a35c);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 10px 18px rgba(183, 121, 62, 0.3);
+}
+
+.signature {
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.boost-button:hover,
+.boost-button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.boost-button:active {
+  transform: translateY(0);
+}
+
+.battle-area {
+  width: min(90vw, 420px);
+  text-align: center;
+}
+
+.battle-button {
+  border: 2px solid #f4d889;
+  border-radius: 999px;
+  padding: 14px 34px;
+  background: linear-gradient(135deg, #d66d3b, #a83b2d);
+  color: #fff8e8;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(8, 24, 15, 0.35);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.battle-button:hover,
+.battle-button:focus-visible {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.1);
+}
+
+.battle-button:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.battle-result {
+  min-height: 68px;
+  margin-top: 12px;
+  color: var(--text-1);
+}
+
+.battle-result.is-rolling {
+  animation: dice-roll 0.18s ease-in-out infinite alternate;
+}
+
+.battle-result .winner {
+  display: block;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-shadow: 0 3px 16px rgba(197, 217, 154, 0.45);
+}
+
+.battle-result .scores {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+@keyframes dice-roll {
+  from {
+    transform: rotate(-2deg) scale(0.98);
+  }
+  to {
+    transform: rotate(2deg) scale(1.04);
+  }
+}
+
+@media (max-width: 420px) {
+  .card-face {
+    padding: 18px 16px 16px;
+    border-radius: 24px;
+  }
+
+  .profile-row {
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 66px;
+    height: 66px;
+    font-size: 1.15rem;
+  }
+
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-inner,
+  .trading-card,
+  .battle-button {
+    transition: none;
+  }
+
+  .battle-result.is-rolling {
+    animation: none;
+  }
+}

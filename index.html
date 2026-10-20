@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Trading Card</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <article class="trading-card" aria-label="Digital trading card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-header">
+              <span class="badge">Yerba Mate</span>
+              <span class="level">LVL 99</span>
+            </div>
+            <div class="card-art" aria-hidden="true">🧉</div>
+
+            <div class="profile-row">
+              <div class="avatar" aria-hidden="true">S</div>
+              <div class="identity">
+                <p class="eyebrow">Trainer</p>
+                <h1>Sabrina</h1>
+              </div>
+            </div>
+
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span class="eyebrow">Major / Interest</span>
+                <strong>Computer Science</strong>
+              </div>
+              <div class="meta-item">
+                <span class="eyebrow">Card Type</span>
+                <strong>Yerba Mate</strong>
+              </div>
+            </div>
+
+            <section class="ability-panel">
+              <p class="eyebrow">Special Ability</p>
+              <h2>Steady Spark</h2>
+              <p>Turns every chaotic idea into a perfectly caffeinated plan.</p>
+            </section>
+
+            <div class="stats" aria-label="Card stats">
+              <div>
+                <span>Snack Power</span>
+                <strong>78</strong>
+              </div>
+              <div>
+                <span>Brain Zoom</span>
+                <strong>91</strong>
+              </div>
+              <div>
+                <span>Cha-Cha Charm</span>
+                <strong>84</strong>
+              </div>
+            </div>
+
+            <button class="boost-button" type="button">Boost Power</button>
+            <footer class="signature">Hand-directed by me, built with AI</footer>
+          </div>
+
+          <div class="card-face card-back">
+            <p class="eyebrow">A little fun fact</p>
+            <h2>Yerba Mate Legend</h2>
+            <p>Legend says Sabrina can debug a program and remember where she left her mate gourd at the same time.</p>
+            <button class="boost-button" type="button">Boost Power</button>
+            <p class="flip-hint">Point away to flip back</p>
+          </div>
+        </div>
+      </article>
+      <section class="battle-area" aria-label="Card battle">
+        <button id="battleButton" class="battle-button" type="button">⚔️ Battle!</button>
+        <div id="battleResult" class="battle-result" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
