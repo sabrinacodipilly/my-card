@@ -53,7 +53,6 @@ body {
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.trading-card:hover .card-inner,
 .trading-card.is-flipped .card-inner {
   transform: rotateY(180deg);
 }

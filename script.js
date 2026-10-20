@@ -1,6 +1,6 @@
 const card = document.querySelector('.trading-card');
 const boostButtons = document.querySelectorAll('.boost-button');
-const powerValue = document.querySelector('.stats div:nth-child(1) strong');
+const statValues = document.querySelectorAll('.stats strong');
 const battleButton = document.getElementById('battleButton');
 const battleResult = document.getElementById('battleResult');
 
@@ -12,10 +12,13 @@ function rollNumber(minimum, maximum) {
 boostButtons.forEach((boostButton) => {
   boostButton.addEventListener('click', (event) => {
     event.stopPropagation();
-    const currentPower = Number(powerValue.textContent);
-    const nextPower = Math.min(currentPower + 10, 99);
 
-    powerValue.textContent = String(nextPower);
+    // Add 10 to each stat, without letting any stat exceed 100.
+    statValues.forEach((stat) => {
+      const currentValue = Number(stat.textContent);
+      stat.textContent = String(Math.min(currentValue + 10, 100));
+    });
+
     card.classList.add('is-boosted');
 
     setTimeout(() => {
@@ -25,13 +28,12 @@ boostButtons.forEach((boostButton) => {
 });
 
 card.addEventListener('click', (event) => {
-  if (event.target.closest('.boost-button')) {
+  if (event.target.closest('button')) {
     return;
   }
 
-  if (window.matchMedia('(hover: none)').matches) {
-    card.classList.toggle('is-flipped');
-  }
+  // Click or tap the card to flip it without interfering with its buttons.
+  card.classList.toggle('is-flipped');
 });
 
 battleButton.addEventListener('click', () => {
